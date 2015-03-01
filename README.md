@@ -34,16 +34,16 @@ For non-numeric `arrays`, provide an accessor `function` for accessing `array` v
 
 ``` javascript
 var data = [
-	{'x':2},
-	{'x':4},
-	{'x':5},
-	{'x':3},
-	{'x':8},
-	{'x':2},
-  {'x':4},
-  {'x':4},
-  {'x':100},
-  {'x':0}
+    {'x':2},
+    {'x':4},
+    {'x':5},
+    {'x':3},
+    {'x':8},
+    {'x':2},
+    {'x':4},
+    {'x':4},
+    {'x':100},
+    {'x':0}
 ];
 
 function getValue( d ) {

@@ -42,7 +42,6 @@
   "dependencies": {
     "validate.io-array": "^1.0.3",
     "validate.io-number": "^1.0.3",
-    "validate.io-object": "^1.0.3"
   },
   "devDependencies": {
     "chai": "1.x.x",
