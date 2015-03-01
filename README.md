@@ -50,7 +50,7 @@ function getValue( d ) {
 	return d.x;
 }
 
-var mu = mean( data, 0.1, getValue );
+var mu = trimmean( data, 10, getValue );
 // returns 4
 ```
 
