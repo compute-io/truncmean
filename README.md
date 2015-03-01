@@ -1,9 +1,8 @@
-trimmean
+Trimmed Mean
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Calculates themean of a sequence of values excluding outliers.
-
+> Calculates the mean of a sequence of values excluding outliers.
 
 ## Installation
 
@@ -13,22 +12,59 @@ $ npm install compute-trimmean
 
 For use in the browser, use [browserify](https://github.com/substack/node-browserify).
 
-
 ## Usage
 
 ``` javascript
-var foo = require( 'compute-trimmean' );
+var trimmean = require( 'compute-trimmean' );
 ```
 
-#### foo( arr )
+#### trimmean( arr, percent[, accessor] )
 
-What does this function do?
-
-
-## Examples
+Computes the [trimmed mean](http://en.wikipedia.org/wiki/Truncated_mean) of a numeric `array`,
+discarding `percent`\% from the high and low end of the array values.  
 
 ``` javascript
-var foo = require( 'compute-trimmean' );
+var data = [ 2, 4, 5, 3, 8, 2, 4, 4, 100, 0 ];
+
+var mu = trimmean( data, 10);
+// returns 4
+```
+
+For non-numeric `arrays`, provide an accessor `function` for accessing `array` values
+
+``` javascript
+var data = [
+	{'x':2},
+	{'x':4},
+	{'x':5},
+	{'x':3},
+	{'x':8},
+	{'x':2},
+  {'x':4},
+  {'x':4},
+  {'x':100},
+  {'x':0}
+];
+
+function getValue( d ) {
+	return d.x;
+}
+
+var mu = mean( data, 0.1, getValue );
+// returns 4
+```
+
+### Examples
+
+``` javascript
+// Simulate some data...
+var data = new Array( 1000 );
+for ( var i = 0; i < data.length; i++ ) {
+    data[ i ] = Math.random() * 100;
+}
+
+// Calculate the trimmed mean...
+console.log( trimmean( data, 10 ) );
 ```
 
 To run the example code from the top-level application directory,
@@ -36,8 +72,6 @@ To run the example code from the top-level application directory,
 ``` bash
 $ node ./examples/index.js
 ```
-
-
 ## Tests
 
 ### Unit
@@ -69,7 +103,7 @@ $ make view-cov
 ---
 ## License
 
-[MIT license](http://opensource.org/licenses/MIT). 
+[MIT license](http://opensource.org/licenses/MIT).
 
 
 ## Copyright

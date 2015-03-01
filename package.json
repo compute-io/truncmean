@@ -1,7 +1,7 @@
 {
   "name": "compute-trimmean",
   "version": "0.0.0",
-  "description": "Calculates themean of a sequence of values excluding outliers.",
+  "description": "Calculates the mean of a sequence of values excluding outliers.",
   "author": {
     "name": "Philipp Burckhardt",
     "email": "pburckhardt@outlook.com"
@@ -25,12 +25,25 @@
   "keywords": [
     "compute.io",
     "compute",
-    "computation"
+    "computation",
+    "mathematics",
+    "math",
+    "statistics",
+    "stats",
+    "mean",
+    "average",
+    "avg",
+    "arithmetic",
+    "trimmed"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/trimmean/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "validate.io-array": "^1.0.3",
+    "validate.io-number": "^1.0.3",
+    "validate.io-object": "^1.0.3"
+  },
   "devDependencies": {
     "chai": "1.x.x",
     "mocha": "1.x.x",
