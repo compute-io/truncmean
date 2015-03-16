@@ -48,7 +48,7 @@ var mu = truncmean( data, 0.1, {
 // returns 4
 ```
 
-For non-numeric `arrays`, provide an accessor `function` for accessing numeric `array` values
+For non-numeric `arrays`, provide an accessor `function` for accessing numeric `array` values.
 
 ``` javascript
 var data = [
