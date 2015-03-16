@@ -29,7 +29,7 @@ var mu = truncmean( data, 0.1 );
 // returns 4
 ```
 
-If `discard = 0`, then the result is equivalent to the [mean](https://github.com/compute-io/mean). If `discard = 0.5`, then the result is equivalent to the [median](https://github.com/compute-io/median).
+If `discard = 0`, then the result is equivalent to the [mean](https://github.com/compute-io/mean). If `discard = 0.5`, then the result is equivalent to the [median](https://github.com/compute-io/median). If `discard = 0.25`, then the result is equivalent to the [interquartile mean](https://github.com/compute-io/midmean).
 
 The function accepts three `options`:
 
@@ -89,6 +89,7 @@ var mu = truncmean( data, 0.19, {
 ## Notes
 
 *	if provided an empty `array`, the function returns `null`.
+*	the `discard` amount is applied to both "ends" of the (sorted) input `array`. For example, if `discard = 0.1`, 10% of the largest values and 10% of the smallest values are discarded.
 *	interpolation is a weighted average between truncated means having &#8968;`N*p`&#8969; and &#8970;`N*p`&#8971; number of values discarded, where `N` is the input `array` length and `p` is the discard percentage. For example, if `N = 10` and `p = 0.19`, then the interpolated mean is `0.1*mu_{floor} + 0.9*mu_{ceil}`.
 
 
