@@ -74,7 +74,7 @@ var mu = truncmean( data, 0.1, {
 // returns 4
 ```
 
-To interpolate between truncated means if a `discard` percentage does not yield an `integer` number of points to discard, set the `interpolate` option to `true`.
+To interpolate between truncated means if a `discard` percentage does not yield an `integer` number of values to discard, set the `interpolate` option to `true`.
 
 ``` javascript
  var data = [ 2, 4, 5, 3, 8, 2, 4, 4, 100, 0 ];
