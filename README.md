@@ -42,10 +42,10 @@ If the input `array` is already sorted in __ascending__ order, set the `sorted` 
 ``` javascript
 var data = [ 0, 2, 2, 3, 4, 4, 4, 5, 8, 100 ];
 
-var mu = truncmean( data, 0.1, {
+var mu = truncmean( data, 2, {
 	'sorted': true
 });
-// returns 4
+// returns ~3.67
 ```
 
 For non-numeric `arrays`, provide an accessor `function` for accessing numeric `array` values.
