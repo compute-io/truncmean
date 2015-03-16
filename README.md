@@ -1,13 +1,13 @@
-Trimmed Mean
+Truncated Mean
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Calculates the mean of a sequence of values excluding outliers.
+> Computes the [truncated mean](http://en.wikipedia.org/wiki/Truncated_mean) of an array.
 
 ## Installation
 
 ``` bash
-$ npm install compute-trimmean
+$ npm install compute-truncmean
 ```
 
 For use in the browser, use [browserify](https://github.com/substack/node-browserify).
@@ -15,22 +15,40 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 ## Usage
 
 ``` javascript
-var trimmean = require( 'compute-trimmean' );
+var truncmean = require( 'compute-truncmean' );
 ```
 
-#### trimmean( arr, percent[, accessor] )
+#### truncmean( arr, discard[, options] )
 
-Computes the [trimmed mean](http://en.wikipedia.org/wiki/Truncated_mean) of a numeric `array`,
-discarding `percent`\% from the high and low end of the array values.  
+Computes the [truncated mean](http://en.wikipedia.org/wiki/Truncated_mean) of an `array`. The amount of data to discard when computing the mean is given by `discard`. The amount to discard may be expressed as either a percentage on the interval `[0,0.5]` or as an `integer` number of values.
 
 ``` javascript
 var data = [ 2, 4, 5, 3, 8, 2, 4, 4, 100, 0 ];
 
-var mu = trimmean( data, 10);
+var mu = truncmean( data, 0.1 );
 // returns 4
 ```
 
-For non-numeric `arrays`, provide an accessor `function` for accessing `array` values
+If `discard = 0`, then the result is equivalent to the [mean](https://github.com/compute-io/mean). If `discard = 0.5`, then the result is equivalent to the [median](https://github.com/compute-io/median).
+
+The function accepts three `options`:
+
+*	__sorted__: `boolean` indicating if the input `array` is sorted in __ascending__ order. Default: `false`.
+*	__accessor__: accessor `function` for accessing values in object `arrays`.
+*	__interpolate__: `boolean` indicating whether the mean should be interpolated if a `discard` percentage does not yield an `integer` number of values. Default: `false`.
+
+If the input `array` is already sorted in __ascending__ order, set the `sorted` option to `true`.
+
+``` javascript
+var data = [ 0, 2, 2, 3, 4, 4, 4, 5, 8, 100 ];
+
+var mu = truncmean( data, 0.1, {
+	'sorted': true
+});
+// returns 4
+```
+
+For non-numeric `arrays`, provide an accessor `function` for accessing numeric `array` values
 
 ``` javascript
 var data = [
@@ -50,21 +68,45 @@ function getValue( d ) {
 	return d.x;
 }
 
-var mu = trimmean( data, 10, getValue );
+var mu = truncmean( data, 0.1, {
+	'accessor': getValue
+});
 // returns 4
 ```
+
+To interpolate between truncated means whenever a `discard` percentage does not yield an `integer` number of points to discard, set the `interpolate` option to `true`.
+
+``` javascript
+ var data = [ 2, 4, 5, 3, 8, 2, 4, 4, 100, 0 ];
+
+var mu = truncmean( data, 0.19, {
+	'interpolate': true	
+});
+// returns ~3.70 
+```
+
+
+## Notes
+
+*	if provided an empty `array`, the function returns `null`.
+*	interpolation is a weighted average between truncated means having &#8968;`N*p`&#8969; and &#8970;`N*p`&#8971; number of values discarded, where `N` is the input `array` length and `p` is the discard percentage. For example, if `N = 10` and `p = 0.19`, then the interpolated mean is `0.1*mu_{floor} + 0.9*mu_{ceil}`.
+
+
+
 
 ### Examples
 
 ``` javascript
+var truncmean = require( 'compute-truncmean' );
+
 // Simulate some data...
 var data = new Array( 1000 );
 for ( var i = 0; i < data.length; i++ ) {
     data[ i ] = Math.random() * 100;
 }
 
-// Calculate the trimmed mean...
-console.log( trimmean( data, 10 ) );
+// Calculate the truncated mean...
+console.log( truncmean( data, 0.1 ) );
 ```
 
 To run the example code from the top-level application directory,
@@ -72,6 +114,9 @@ To run the example code from the top-level application directory,
 ``` bash
 $ node ./examples/index.js
 ```
+
+
+
 ## Tests
 
 ### Unit
@@ -111,20 +156,20 @@ $ make view-cov
 Copyright &copy; 2015. Philipp Burckhardt.
 
 
-[npm-image]: http://img.shields.io/npm/v/compute-trimmean.svg
-[npm-url]: https://npmjs.org/package/compute-trimmean
+[npm-image]: http://img.shields.io/npm/v/compute-truncmean.svg
+[npm-url]: https://npmjs.org/package/compute-truncmean
 
-[travis-image]: http://img.shields.io/travis/compute-io/trimmean/master.svg
-[travis-url]: https://travis-ci.org/compute-io/trimmean
+[travis-image]: http://img.shields.io/travis/compute-io/truncmean/master.svg
+[travis-url]: https://travis-ci.org/compute-io/truncmean
 
-[coveralls-image]: https://img.shields.io/coveralls/compute-io/trimmean/master.svg
-[coveralls-url]: https://coveralls.io/r/compute-io/trimmean?branch=master
+[coveralls-image]: https://img.shields.io/coveralls/compute-io/truncmean/master.svg
+[coveralls-url]: https://coveralls.io/r/compute-io/truncmean?branch=master
 
-[dependencies-image]: http://img.shields.io/david/compute-io/trimmean.svg
-[dependencies-url]: https://david-dm.org/compute-io/trimmean
+[dependencies-image]: http://img.shields.io/david/compute-io/truncmean.svg
+[dependencies-url]: https://david-dm.org/compute-io/truncmean
 
-[dev-dependencies-image]: http://img.shields.io/david/dev/compute-io/trimmean.svg
-[dev-dependencies-url]: https://david-dm.org/dev/compute-io/trimmean
+[dev-dependencies-image]: http://img.shields.io/david/dev/compute-io/truncmean.svg
+[dev-dependencies-url]: https://david-dm.org/dev/compute-io/truncmean
 
-[github-issues-image]: http://img.shields.io/github/issues/compute-io/trimmean.svg
-[github-issues-url]: https://github.com/compute-io/trimmean/issues
+[github-issues-image]: http://img.shields.io/github/issues/compute-io/truncmean.svg
+[github-issues-url]: https://github.com/compute-io/truncmean/issues

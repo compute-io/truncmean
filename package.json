@@ -1,7 +1,7 @@
 {
-  "name": "compute-trimmean",
+  "name": "compute-truncmean",
   "version": "0.0.0",
-  "description": "Calculates the mean of a sequence of values excluding outliers.",
+  "description": "Computes the truncated mean of an array.",
   "author": {
     "name": "Philipp Burckhardt",
     "email": "pburckhardt@outlook.com"
@@ -10,6 +10,10 @@
     {
       "name": "Philipp Burckhardt",
       "email": "pburckhardt@outlook.com"
+    },
+    {
+      "name": "Athan Reines",
+      "email": "kgryte@gmail.com"
     }
   ],
   "scripts": {
@@ -20,7 +24,7 @@
   "main": "./lib",
   "repository": {
     "type": "git",
-    "url": "git://github.com/compute-io/trimmean.git"
+    "url": "git://github.com/compute-io/truncmean.git"
   },
   "keywords": [
     "compute.io",
@@ -34,18 +38,24 @@
     "average",
     "avg",
     "arithmetic",
-    "trimmed"
+    "trimmed",
+    "truncated",
+    "modified",
+    "central tendency",
+    "windsor"
   ],
   "bugs": {
-    "url": "https://github.com/compute-io/trimmean/issues"
+    "url": "https://github.com/compute-io/truncmean/issues"
   },
   "dependencies": {
     "validate.io-array": "^1.0.3",
-    "validate.io-number": "^1.0.3"
+    "validate.io-boolean-primitive": "^1.0.0",
+    "validate.io-number-primitive": "^1.0.0",
+    "validate.io-object": "^1.0.3"
   },
   "devDependencies": {
-    "chai": "1.x.x",
-    "mocha": "1.x.x",
+    "chai": "2.x.x",
+    "mocha": "2.x.x",
     "coveralls": "^2.11.1",
     "istanbul": "^0.3.0",
     "jshint": "2.x.x",
