@@ -1,12 +1,9 @@
 'use strict';
 
-var trimmean = require( './../lib' );
+var truncmean = require( './../lib' );
 
-// Simulate some data...
 var data = new Array( 1000 );
 for ( var i = 0; i < data.length; i++ ) {
     data[ i ] = Math.random() * 100;
 }
-
-// Calculate the mean...
-console.log( trimmean( data, 10 ) );
+console.log( truncmean( data, 0.1 ) );
