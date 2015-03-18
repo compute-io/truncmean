@@ -20,7 +20,7 @@ var truncmean = require( 'compute-truncmean' );
 
 #### truncmean( arr, discard[, options] )
 
-Computes the [truncated mean](http://en.wikipedia.org/wiki/Truncated_mean) of an `array`. The amount of data to discard when computing the mean is given by `discard`. The amount to discard may be expressed as either a percentage on the interval `[0,0.5]` or as an `integer` number of values.
+Computes the [truncated mean](http://en.wikipedia.org/wiki/Truncated_mean) of an `array`. The amount of data to discard from the high and low end of the data when computing the mean is given by `discard`. The amount to discard may be expressed as either a percentage on the interval `[0,0.5]` or as an `integer` number of values. In the latter case, `discard` number of observations are removed from both ends, so the supplied value has to be lower than half of the array length.
 
 ``` javascript
 var data = [ 2, 4, 5, 3, 8, 2, 4, 4, 100, 0 ];
@@ -80,9 +80,9 @@ To interpolate between truncated means if a `discard` percentage does not yield 
  var data = [ 2, 4, 5, 3, 8, 2, 4, 4, 100, 0 ];
 
 var mu = truncmean( data, 0.19, {
-	'interpolate': true	
+	'interpolate': true
 });
-// returns ~3.70 
+// returns ~3.70
 ```
 
 
