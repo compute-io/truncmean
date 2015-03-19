@@ -20,7 +20,7 @@ var truncmean = require( 'compute-truncmean' );
 
 #### truncmean( arr, discard[, options] )
 
-Computes the [truncated mean](http://en.wikipedia.org/wiki/Truncated_mean) of an `array`. The amount of data to discard from the high and low end of the data when computing the mean is given by `discard`. The amount to discard may be expressed as either a percentage on the interval `[0,0.5]` or as an `integer` number of values. In the latter case, `discard` number of observations are removed from both ends, so the supplied value has to be lower than half of the array length.
+Computes the [truncated mean](http://en.wikipedia.org/wiki/Truncated_mean) of an `array`. The truncated mean is an [order statistic](http://en.wikipedia.org/wiki/Order_statistic), meaning that the statistic is computed over an ordered representation having length `N`. The `discard` parameter specifies how many values are excluded when computing the statistic. When expressed as a percentage `p` on the interval `[0,0.5]`, `N*p` values are excluded from the low end of the input `array` and another `N*p` values are excluded from the high end of the input `array`. When expressed as an integer `n < N/2`, `n` values are excluded from the low end and another `n` values are excluded from the high end.
 
 ``` javascript
 var data = [ 2, 4, 5, 3, 8, 2, 4, 4, 100, 0 ];
