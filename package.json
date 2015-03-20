@@ -1,6 +1,6 @@
 {
   "name": "compute-truncmean",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Computes the truncated mean of an array.",
   "author": {
     "name": "Philipp Burckhardt",
